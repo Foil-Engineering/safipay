@@ -1,0 +1,13 @@
+.btn {
+    border-radius: 10px;
+}
+
+.btn.primary.filled {
+    background-color: var(--primary-color);
+    text-align: center;
+    padding: 12px;
+}
+
+.btn.full {
+    width: 100%;
+}
