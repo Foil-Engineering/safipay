@@ -1,0 +1,41 @@
+@import '../global/variables';
+
+.login-page-wrapper {
+  h1 {
+    color: var(--primary-color);
+  }
+
+  .illustrations {
+    width: 260px;
+  }
+
+  .login-illustration-bg {
+    height: 330px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    border-radius: 20px;
+    background-image: url("../../public/assets/pages/login/bg-big.svg");
+  }
+
+  .login-illustration-xs {
+    height: 90px;
+    width: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-top: 20px;
+    border-radius: 20px;
+    background-image: url("../../public/assets/pages/login/bg-sm.svg");
+  }
+
+  .circle-bg-xs {
+    bottom: 60px;
+    right: -30px;
+    width: 89px;
+    height: 87px;
+    background: rgba(83, 202, 209, 0.5);
+    border-radius: 300px;
+  }
+}
