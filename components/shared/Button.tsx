@@ -5,14 +5,14 @@ import { SharedButtonProps } from "../../interfaces";
 const Button: FC<SharedButtonProps> = (props) => {
   const { link = "#", label, primary = true, type, width = 0 } = props;
   return (
-    <Link
+    <a
       href={link}
       className={`${type}-btn ${primary ? "primary" : ""} ${
-        !width ? "full-btn" : ""
+        !width ? "full" : `w${width}`
       } btn`}
     >
-      <p>{label}</p>
-    </Link>
+      <p className="btn-label">{label}</p>
+    </a>
   );
 };
 

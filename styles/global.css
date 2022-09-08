@@ -14,3 +14,9 @@ h4 {
 p {
   margin: 0;
 }
+
+.section-wrapper {
+  max-width: 80rem;
+  margin: 0 auto;
+  width: 90%;
+}

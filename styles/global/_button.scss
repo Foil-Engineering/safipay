@@ -1,13 +1,26 @@
 .btn {
-    border-radius: 10px;
-}
-
-.btn.primary.filled {
-    background-color: var(--primary-color);
+  p {
     text-align: center;
     padding: 12px;
+    width: 100%;
+    border-radius: 10px;
+    color: var(--white);
+    font-weight: 400;
+  }
+}
+
+.btn.primary.filled-btn {
+  p {
+    background-color: var(--primary-color);
+  }
 }
 
 .btn.full {
-    width: 100%;
+  width: 100%;
+}
+
+.btn.w130 {
+  p {
+    width: 130px;
+  }
 }

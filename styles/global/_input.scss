@@ -1,0 +1,17 @@
+.input-wrapper {
+  margin-top: 40px;
+
+  .input {
+    border: none;
+    border-bottom: 1px solid #e3dede !important;
+    padding: 0 0 16px;
+    outline: none;
+    width: 100% !important;
+  }
+
+  [placeholder]:focus::-webkit-input-placeholder {
+    transition: text-indent 0.4s 0.4s ease;
+    text-indent: -100%;
+    opacity: 1;
+  }
+}

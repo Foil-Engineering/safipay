@@ -1,12 +1,45 @@
-@import '../global/variables';
+@import "../global/variables";
+@import "../global/button";
+@import "../global/input";
 
 .login-page-wrapper {
+  .login-intro {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    font-family: "Inter";
+    color: #999999;
+    margin-top: 19px;
+  }
+
+  .form {
+    margin-top: 26px;
+    .intro-form {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 15px;
+      color: var(--black);
+    }
+
+    .link-bottom {
+      font-family: "Inter";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 15px;
+      color: #848181;
+    }
+  }
+
   h1 {
     color: var(--primary-color);
   }
 
   .illustrations {
-    width: 260px;
+    width: 30%;
   }
 
   .login-illustration-bg {

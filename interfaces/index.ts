@@ -13,6 +13,6 @@ export interface SharedButtonProps {
 
 export interface InputFieldProps {
   label?: string;
-  onTextChange: (e: InputEvent) => void;
+  onTextChange: (text: string) => void;
   placeholder: string;
 }
