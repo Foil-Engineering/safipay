@@ -26,19 +26,19 @@ const SideBar: FC<SidebarProps> = (props) => {
       inactiveIcon: "/assets/shared/kyc-inactive.svg",
       id: "kyc",
     },
-    {
-      label: "Subscriptions",
-      activeIcon: "/assets/shared/payment-inactive.svg",
-      inactiveIcon: "/assets/shared/payment-inactive.svg",
-      id: "subscriptions",
-    },
+    // {
+    //   label: "Subscriptions",
+    //   activeIcon: "/assets/shared/payment-inactive.svg",
+    //   inactiveIcon: "/assets/shared/payment-inactive.svg",
+    //   id: "subscriptions",
+    // },
   ];
 
   const [activeMenu, setActiveMenu] = useState<string>("bills");
 
   return (
-    <div className="sidebar-wrapper">
-      <div className="logo flex justify-center items-center mb-16">
+    <div className="sidebar-wrapper mt-24">
+      <div className="logo flex justify-center items-center mb-20">
         <h4>SafiPay</h4>
       </div>
       <div className="menu">

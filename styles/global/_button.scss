@@ -1,8 +1,9 @@
 .btn {
   border-radius: 10px;
+  padding: 12px;
+
   p {
     text-align: center;
-    padding: 12px;
     width: 100%;
     color: var(--white);
     font-weight: 400;
@@ -13,10 +14,18 @@
   background-color: var(--primary-color);
 }
 
+.btn.filled-secondary-btn {
+  background-color: #7AAFF7;
+}
+
 .btn.full {
   width: 100%;
 }
 
 .btn.w130 {
   width: 130px;
+}
+
+.btn.w170 {
+  width: 170px;
 }

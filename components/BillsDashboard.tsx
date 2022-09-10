@@ -1,12 +1,13 @@
 import { FC } from "react";
 import Button from "./shared/Button";
+import SingleBill from "./SingleBill";
 
 export interface Bill {
   client: string;
   amount: string;
   period: string;
   paymentDate: string;
-  status: "PENDING" | "PAID" | "REFUSED";
+  status: "Pending" | "Paid" | "Refused";
   currency: string;
 }
 
@@ -14,10 +15,11 @@ interface BillsProps {
   data: Bill[];
 }
 
-const BillsDashboard: FC<BillsProps> = () => {
+const BillsDashboard: FC<BillsProps> = (props) => {
+  const { data } = props;
   return (
-    <div className="bills-dash">
-      <div className="bills-header">
+    <div className="bills-dash p-8">
+      <div className="bills-header flex flex-row justify-between">
         <div className="">
           <h2>Your bills</h2>
           <p className="sub-title">in one place</p>
@@ -25,11 +27,15 @@ const BillsDashboard: FC<BillsProps> = () => {
         <Button
           label="New bill"
           type="filled"
-          width={130}
+          width={170}
           icon="/assets/shared/file.svg"
         />
       </div>
-      <div className="cards"></div>
+      <div className="cards grid-d3-t2-m1 mt-12 gap-5">
+        {data.map((d, idx) => (
+          <SingleBill {...d} key={idx} />
+        ))}
+      </div>
     </div>
   );
 };

@@ -1,5 +1,8 @@
 .home-bg {
-  background-image: linear-gradient(30deg, #6fcf97, #34e1eb, #c5d0d1);
+  background-image: url('../../public/assets/pages/home/bg.jpg');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
   min-height: 100vh;
 }
 
@@ -23,6 +26,59 @@
 }
 
 .bills-dash {
+  background: rgba(248, 243, 243, 0.79);
+  border-radius: 30px;
+
+  .single-bill {
+    background-color: var(--white);
+    box-shadow: 0px 4px 4px rgba(108, 103, 103, 0.25);
+
+    .client-label {
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 15px;
+      color: #000000;
+    }
+
+    .periiod {
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 18px;
+      color: #000000;
+    }
+
+    .amount {
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 24px;
+      color: #000000;
+    }
+
+    .issuer {
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 12px;
+      line-height: 15px;
+      color: #817272;
+    }
+
+    .datetime {
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 10px;
+      line-height: 12px;
+      color: #817272;
+    }
+  }
+
   .bills-header {
     h2 {
       font-style: normal;
@@ -40,4 +96,35 @@
       color: #727876;
     }
   }
+}
+
+.status-wrapper {
+  h3 {
+    font-family: "Montserrat";
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    color: #999999;
+  }
+}
+
+.status.pending,
+.status.paid,
+.status.refused {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+}
+
+.status.paid {
+  background-color: #67fd41;
+}
+
+.status.pending {
+  background-color: #fda741;
+}
+
+.status.refused {
+  background-color: #fd4d41;
 }
