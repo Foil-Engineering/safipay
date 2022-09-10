@@ -11,6 +11,7 @@ export interface SharedButtonProps {
   width?: number;
   icon?: string;
   hasShaddow?: boolean;
+  onClick?: () => void;
 }
 
 export interface InputFieldProps {

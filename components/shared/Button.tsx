@@ -11,6 +11,7 @@ const Button: FC<SharedButtonProps> = (props) => {
     width = 0,
     icon,
     hasShaddow = false,
+    onClick,
   } = props;
   return (
     <a
@@ -20,10 +21,10 @@ const Button: FC<SharedButtonProps> = (props) => {
       } btn flex flex-row items-center justify-center ${
         hasShaddow ? "btn-shaddow" : ""
       }`}
+      onClick={onClick}
     >
       {icon ? (
         <Image
-          // className="mr-2"
           src={icon}
           alt="btn icon"
           height="26px"

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import Button from "./shared/Button";
 import SingleBill from "./SingleBill";
 
@@ -17,6 +17,8 @@ interface BillsProps {
 
 const BillsDashboard: FC<BillsProps> = (props) => {
   const { data } = props;
+  const [showBillModal, setShowBillModal] = useState<boolean>(false);
+
   return (
     <div className="bills-dash p-8">
       <div className="bills-header flex flex-row justify-between">
@@ -29,6 +31,7 @@ const BillsDashboard: FC<BillsProps> = (props) => {
           type="filled"
           width={170}
           icon="/assets/shared/file.svg"
+          onClick={() => setShowBillModal(true)}
         />
       </div>
       <div className="cards grid-d3-t2-m1 mt-12 gap-5">
