@@ -1,14 +1,16 @@
 export type User = {
-  id: number
-  name: string
-}
+  id: number;
+  name: string;
+};
 
 export interface SharedButtonProps {
   label: string;
-  type: 'filled' | 'outlined';
+  type: "filled" | "outlined" | "filled-secondary" | "outlined-secondary";
   primary?: boolean;
   link?: string;
   width?: number;
+  icon?: string;
+  hasShaddow?: boolean;
 }
 
 export interface InputFieldProps {

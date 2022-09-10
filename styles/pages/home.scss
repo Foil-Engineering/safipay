@@ -1,4 +1,43 @@
 .home-bg {
-  background-image: linear-gradient(30deg, #6FCF97, #34e1eb, #c5d0d1);
+  background-image: linear-gradient(30deg, #6fcf97, #34e1eb, #c5d0d1);
   min-height: 100vh;
+}
+
+.notif-container {
+  height: 70px;
+  width: 70px;
+  border-radius: 35px;
+}
+
+.notif-container,
+.profile-wrapper {
+  box-shadow: 0px 4px 4px rgba(85, 85, 85, 0.25);
+  background-color: var(--white);
+  h4 {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: #6a6363;
+  }
+}
+
+.bills-dash {
+  .bills-header {
+    h2 {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 40px;
+      line-height: 49px;
+      color: #727876;
+    }
+
+    .sub-title {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 24px;
+      color: #727876;
+    }
+  }
 }

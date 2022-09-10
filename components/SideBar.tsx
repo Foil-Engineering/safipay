@@ -1,7 +1,12 @@
 import Image from "next/image";
-import { useState } from "react";
+import { FC, useState } from "react";
 
-const SideBar = () => {
+interface SidebarProps {
+  onSwitchTab: (tab: string) => void;
+}
+
+const SideBar: FC<SidebarProps> = (props) => {
+  const { onSwitchTab } = props;
   const sidebarMenus = [
     {
       label: "Dashboard",
@@ -33,7 +38,7 @@ const SideBar = () => {
 
   return (
     <div className="sidebar-wrapper">
-      <div className="logo flex justify-center items-center mb-14">
+      <div className="logo flex justify-center items-center mb-16">
         <h4>SafiPay</h4>
       </div>
       <div className="menu">
@@ -43,6 +48,10 @@ const SideBar = () => {
               activeMenu === item.id ? "active" : ""
             } py-5 pl-14 w-full flex flex-row align-items-center`}
             key={item.id}
+            onClick={() => {
+              onSwitchTab(item.id)
+              setActiveMenu(item.id)
+            }}
           >
             <Image
               alt="menu icon"
