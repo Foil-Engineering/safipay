@@ -22,7 +22,19 @@ export default class Login extends Component{
     event.preventDefault();
     //const output = await serverInstance.postRequest("auth/signup", this.state);
     //console.log(output);
-    const res = await serverInstance.postRequest("signup",this.state,false);
+    const data = await serverInstance.postRequest("signup",this.state,false);
+    if (data) {
+      console.log(data);
+      //return;
+      if(data.token){
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        this.setState({loading : false});
+        window.location.href = "/";
+        return;
+      }
+      
+    }
     console.log(res);
 
   }
