@@ -61,8 +61,11 @@ export default class Home extends Component{
     //console.log("Dummy data ", this.dummyData);
   }
 
+  
+
   render(){    
     const currentTab = this.state.tab;
+    const user_details = typeof window !== "undefined" && localStorage && localStorage.user ? JSON.parse(localStorage.user) : {};
     return (
       <div className="home-bg">
         <div className="section-wrapper">
@@ -79,7 +82,7 @@ export default class Home extends Component{
                   />
                 </div>
                 <div className="profile-wrapper flex flex-row px-6 py-5 rounded-3xl items-center gap-6">
-                  <h4>Eliel M.</h4>
+                  <h5>{user_details.names ? user_details.names : ''}</h5>
                   <Image
                     src="/assets/shared/profile.svg"
                     height="35px"
