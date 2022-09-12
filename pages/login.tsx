@@ -31,11 +31,16 @@ export default class Login extends Component{
       password: this.state.password,
     });
     if (data) {
-      localStorage.setItem("token", data.token);
-      localStorage.setItem("user", JSON.stringify(data.user));
-      this.setState({loading : false});
-      window.location.href = "/";
-      return;
+      console.log(data);
+      //return;
+      if(data.token){
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        this.setState({loading : false});
+        window.location.href = "/";
+        return;
+      }
+      
     }
 
     this.setState({loading : false});

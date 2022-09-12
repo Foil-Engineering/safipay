@@ -34,13 +34,15 @@ class ApiServices {
     }
   };
 
-  getRequest = async (endpoint: string) => {
+  getRequest = async (endpoint: string, isProtected : boolean = false) => {
     try {
+      const headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+
       const res = await fetch(`${this.BASE_URL}${endpoint}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
+        headers: isProtected ? { ...headers, Authorization: this.getToken() } : headers,
         method: "GET",
       });
 
@@ -55,7 +57,7 @@ class ApiServices {
   putRequest = async () => {};
 
   getToken = () => {
-    return localStorage.getItem("auth-token") ?? "";
+    return "Bearer " + localStorage.getItem("token") ?? "";
   };
 }
 

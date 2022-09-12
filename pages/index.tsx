@@ -6,16 +6,18 @@ import SideBar from "../components/SideBar";
 
 import { useRef,useEffect } from "react";
 import { render } from "sass";
+import { serverInstance } from "../utils/apiServices";
 
 export default class Home extends Component{
 
   state = {
-    tab : "bills"
+    tab : "bills",
+    dummyData : []
   }
   
   
   //const [currentTab, setCurrentTab] = useState<string>("bills");
-   dummyData: Bill[] = [
+   dummyData: Bill[] = [];/*[
     {
       amount: "100.000",
       client: "Actom Inc.",
@@ -48,13 +50,15 @@ export default class Home extends Component{
       period: "SEPTEMBER 2022",
       status: "Refused",
     },
-  ];
+  ];*/
 
-  componentDidMount(){
+  async componentDidMount(){
     if(!localStorage.token){
       window.location.href = "/login";
     }
-    
+    const dummy_data = await serverInstance.getRequest("bills",true);
+    this.setState({dummyData : dummy_data});
+    //console.log("Dummy data ", this.dummyData);
   }
 
   render(){    
@@ -85,7 +89,7 @@ export default class Home extends Component{
                 </div>
               </div>
               {currentTab === "bills" ? (
-                <BillsDashboard data={this.dummyData} />
+                <BillsDashboard data={this.state.dummyData} />
               ) : currentTab === "kyc" ? (
                 <KYCDashboard />
               ) : (
