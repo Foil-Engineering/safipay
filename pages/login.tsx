@@ -23,7 +23,8 @@ const Login = () => {
       password: "pwd",
     });
     if (data) {
-      //
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("user", JSON.stringify(data.user));
       setLoading(false);
       return;
     }

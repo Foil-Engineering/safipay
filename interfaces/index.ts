@@ -24,4 +24,5 @@ export interface InputFieldProps {
   label?: string;
   onTextChange: (text: string) => void;
   placeholder: string;
+  type: string;
 }
