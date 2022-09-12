@@ -1,5 +1,5 @@
 .home-bg {
-  background-image: url('../../public/assets/pages/home/bg.jpg');
+  background-image: url("../../public/assets/pages/home/bg.jpg");
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -94,6 +94,39 @@
       font-size: 20px;
       line-height: 24px;
       color: #727876;
+    }
+  }
+}
+
+.container-modal {
+  background: rgba(237, 234, 234, 0.75);
+}
+
+.modal-invoice {
+  .modal-wrapper {
+    max-width: 65rem;
+    margin: auto;
+
+    h3 {
+      font-style: normal;
+      font-weight: 400;
+      font-size: 40px;
+      line-height: 49px;
+      color: var(--black);
+    }
+
+    .form-new-invoice {
+      background-color: var(--white);
+
+      .cancel-btn {
+        color: red;
+        font-size: 24px;
+        line-height: 29px;
+      }
+
+      .actions {
+        width: 30%;
+      }
     }
   }
 }

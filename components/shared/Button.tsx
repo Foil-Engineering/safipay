@@ -4,7 +4,7 @@ import { SharedButtonProps } from "../../interfaces";
 
 const Button: FC<SharedButtonProps> = (props) => {
   const {
-    link = "#",
+    link,
     label,
     primary = true,
     type,
@@ -14,27 +14,42 @@ const Button: FC<SharedButtonProps> = (props) => {
     onClick,
   } = props;
   return (
-    <a
-      href={link}
-      className={`${type}-btn ${primary ? "primary" : ""} ${
-        !width ? "full" : `w${width}`
-      } btn flex flex-row items-center justify-center ${
-        hasShaddow ? "btn-shaddow" : ""
-      }`}
-      onClick={onClick}
-    >
-      {icon ? (
-        <Image
-          src={icon}
-          alt="btn icon"
-          height="26px"
-          width="26px"
-        />
+    <>
+      {link ? (
+        <a
+          href={link ? link : ""}
+          className={`${type}-btn ${primary ? "primary" : ""} ${
+            !width ? "full" : `w${width}`
+          } btn flex flex-row items-center justify-center ${
+            hasShaddow ? "btn-shaddow" : ""
+          }`}
+          onClick={onClick}
+        >
+          {icon ? (
+            <Image src={icon} alt="btn icon" height="26px" width="26px" />
+          ) : (
+            <></>
+          )}
+          <p className="btn-label">{label}</p>
+        </a>
       ) : (
-        <></>
+        <span
+          className={`${type}-btn ${primary ? "primary" : ""} ${
+            !width ? "full" : `w${width}`
+          } btn flex flex-row items-center justify-center ${
+            hasShaddow ? "btn-shaddow" : ""
+          }`}
+          onClick={onClick}
+        >
+          {icon ? (
+            <Image src={icon} alt="btn icon" height="26px" width="26px" />
+          ) : (
+            <></>
+          )}
+          <p className="btn-label">{label}</p>
+        </span>
       )}
-      <p className="btn-label">{label}</p>
-    </a>
+    </>
   );
 };
 

@@ -15,7 +15,11 @@
 }
 
 .btn.filled-secondary-btn {
-  background-color: #7AAFF7;
+  background-color: #7aaff7;
+}
+
+.btn.btn.filled-danger-btn {
+  background-color: rgb(193, 56, 56);
 }
 
 .btn.full {
@@ -28,4 +32,16 @@
 
 .btn.w170 {
   width: 170px;
+}
+
+.btn.w190 {
+  width: 190px;
+}
+
+.btn.w240 {
+  width: 240px;
+}
+
+.btn.w220 {
+  width: 220px;
 }

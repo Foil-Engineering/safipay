@@ -18,7 +18,7 @@ const Login = () => {
       </div>
       <div className="flex-1">
         <div className="flex flex-row justify-end">
-          <Button type="filled" width={130} link="/signup" label="Sign up" />
+          <Button type="filled" width={130} link="/login" label="Log in" />
         </div>
         <div className="pr-24">
           <div>

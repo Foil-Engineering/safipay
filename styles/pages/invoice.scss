@@ -1,0 +1,36 @@
+.new-invoice-wrapper {
+  min-height: 100vh;
+  background-image: url("../../public/assets/pages/home/bg.jpg");
+  background-size: cover;
+  background-position: center;
+
+  .section-wrapper {
+    background: rgba(248, 243, 243, 0.79);
+    max-width: 60rem;
+    width: 80%;
+
+    .intro,
+    .btm-txt {
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 24px;
+      line-height: 29px;
+      color: #000000;
+      text-align: center;
+    }
+
+    .btm-txt {
+      width: 40%;
+    }
+
+    .amount {
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 50px;
+      line-height: 61px;
+      color: #000000;
+    }
+  }
+}

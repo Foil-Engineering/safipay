@@ -25,19 +25,20 @@
       }
     }
   }
-  .logo {
-    height: 110px;
-    width: 110px;
-    border-radius: 50%;
-    background-color: #fff;
-    margin: auto;
-    margin-bottom: 60px;
+}
 
-    h4 {
-      font-weight: 400;
-      font-size: 24px;
-      line-height: 29px;
-      color: var(--primary-color);
-    }
+.logo {
+  height: 110px;
+  width: 110px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin: auto;
+  margin-bottom: 60px;
+
+  h4 {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: var(--primary-color);
   }
 }

@@ -5,7 +5,13 @@ export type User = {
 
 export interface SharedButtonProps {
   label: string;
-  type: "filled" | "outlined" | "filled-secondary" | "outlined-secondary";
+  type:
+    | "filled"
+    | "outlined"
+    | "filled-secondary"
+    | "outlined-secondary"
+    | "filled-danger"
+    | "outlined-danger";
   primary?: boolean;
   link?: string;
   width?: number;
