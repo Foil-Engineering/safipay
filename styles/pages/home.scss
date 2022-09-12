@@ -25,6 +25,44 @@
   }
 }
 
+.kyc-tab-wrapper {
+  .tab {
+    border-bottom: 1px solid #c8c1c1;
+  }
+
+  .active.tab {
+    border-bottom: 3px solid #6fcf97;
+  }
+
+  .id-photo-wrapper {
+    background: #ababab;
+    border-radius: 20px;
+    height: 370px;
+
+    p {
+      font-family: "Montserrat";
+      font-style: normal;
+      font-weight: 400;
+      font-size: 20px;
+      line-height: 24px;
+      text-align: center;
+      color: #ffffff;
+      width: 30%;
+    }
+  }
+}
+
+.form-content::-webkit-scrollbar {
+  display: none;
+}
+
+.form-content {
+  max-height: calc(100vh - 350px);
+  overflow-y: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 .bills-dash,
 .kyc-tab-wrapper {
   background: rgba(248, 243, 243, 0.79);

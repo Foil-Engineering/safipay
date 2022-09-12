@@ -33,7 +33,7 @@ const Button: FC<SharedButtonProps> = (props) => {
           <p className="btn-label">{label}</p>
         </a>
       ) : (
-        <span
+        <button
           className={`${type}-btn ${primary ? "primary" : ""} ${
             !width ? "full" : `w${width}`
           } btn flex flex-row items-center justify-center ${
@@ -47,7 +47,7 @@ const Button: FC<SharedButtonProps> = (props) => {
             <></>
           )}
           <p className="btn-label">{label}</p>
-        </span>
+        </button>
       )}
     </>
   );
