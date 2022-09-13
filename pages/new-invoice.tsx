@@ -1,7 +1,9 @@
+import { ethers } from "ethers";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Button from "../components/shared/Button";
+import { CONTRACT_ABI, CONTRACT_ADDRESS, SAFIPAY_VAULT_ADDRESS } from "../utils/constants";
 
 enum STEPS {
   PAY_NOW = "PAY_NOW",
@@ -10,15 +12,31 @@ enum STEPS {
   INITIAL = "INITIAL",
 }
 
-function connectWallet() {
-  
+enum WALLETS{
+  METAMASK = "metamask",
+  COINBASE = "coinbase"
 }
+
 const NewInvoice = () => {
   const [step, setStep] = useState<STEPS>(STEPS.INITIAL);
   const router = useRouter();
   const { invoice_id } = router.query;
   const loadInvoice = async () => {}; // TO BE CALLING APIs
 
+  const pay = async (amount:number) => {
+    const provider = window.ethereum
+    if (window.ethereum) {
+          provider .request({ method: 'eth_requestAccounts' });
+          const connection = new ethers.providers.Web3Provider(provider);
+          const signer = connection.getSigner();
+          const usdtContract = new ethers.Contract(CONTRACT_ADDRESS,CONTRACT_ABI,signer);
+      
+          const tx = usdtContract.transfer(SAFIPAY_VAULT_ADDRESS,amount);
+          await tx.wait();
+        } 
+      }
+  
+  
   useEffect(() => {
     loadInvoice();
   }, []);
@@ -59,7 +77,11 @@ const NewInvoice = () => {
             <Button
               label="PAY NOW"
               type="filled"
-              onClick={() => setStep(STEPS.PAID)}
+              onClick={ async() => {
+                
+                await pay(1300);
+                setStep(STEPS.PAID);
+              }}
               width={220}
             />
             <div className="py-4" />
