@@ -10,6 +10,9 @@ enum STEPS {
   INITIAL = "INITIAL",
 }
 
+function connectWallet() {
+  
+}
 const NewInvoice = () => {
   const [step, setStep] = useState<STEPS>(STEPS.INITIAL);
   const router = useRouter();
