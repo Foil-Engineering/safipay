@@ -1,0 +1,44 @@
+.sidebar-wrapper {
+  padding: 20px 8px;
+  background: rgba(255, 255, 255, 0.57);
+  border-radius: 30px;
+  width: 30%;
+  height: fit-content;
+
+  .menu {
+    .sub-menu {
+      border-radius: 10px;
+      p {
+        font-family: "Montserrat";
+        font-style: normal;
+        font-weight: 400;
+        font-size: 24px;
+        line-height: 29px;
+        color: #727876;
+      }
+    }
+
+    .sub-menu.active {
+      background-color: var(--white);
+      p {
+        color: var(--primary-color) !important;
+      }
+    }
+  }
+}
+
+.logo {
+  height: 110px;
+  width: 110px;
+  border-radius: 50%;
+  background-color: #fff;
+  margin: auto;
+  margin-bottom: 60px;
+
+  h4 {
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 29px;
+    color: var(--primary-color);
+  }
+}

@@ -1,10 +1,27 @@
-// You can include shared interfaces/types in a separate file
-// and then use them in any component by importing them. For
-// example, to import the interface below do:
-//
-// import { User } from 'path/to/interfaces';
-
 export type User = {
-  id: number
-  name: string
+  id: number;
+  name: string;
+};
+
+export interface SharedButtonProps {
+  label: string;
+  type:
+    | "filled"
+    | "outlined"
+    | "filled-secondary"
+    | "outlined-secondary"
+    | "filled-danger"
+    | "outlined-danger";
+  primary?: boolean;
+  link?: string;
+  width?: number;
+  icon?: string;
+  hasShaddow?: boolean;
+  onClick?: () => void;
+}
+
+export interface InputFieldProps {
+  label?: string;
+  onTextChange: (text: string) => void;
+  placeholder: string;
 }
