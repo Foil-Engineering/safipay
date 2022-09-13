@@ -22,7 +22,7 @@ const BillsDashboard: FC<BillsProps> = (props) => {
 
   return (
     <div className="bills-dash p-8">
-      <div className="bills-header flex flex-row justify-between">
+      <div className="header flex flex-row justify-between">
         <div className="">
           <h2>Your bills</h2>
           <p className="sub-title">in one place</p>

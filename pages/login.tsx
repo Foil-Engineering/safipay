@@ -1,11 +1,35 @@
+import { useState } from "react";
 import Button from "../components/shared/Button";
 import InputField from "../components/shared/InputField";
+import { serverInstance } from "../utils/apiServices";
 
 const Login = () => {
+  // STATES
+  const [lading, setLoading] = useState<boolean>(false);
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
   const loginFields = [
     { placeholder: "Email address" },
     { placeholder: "Password" },
   ];
+
+  const handleLogin = async () => {
+    setLoading(true);
+    const data = await serverInstance.postRequest("login", {
+      email: "elimek2@gmail.com",
+      password: "pwd",
+    });
+    if (data) {
+      //
+      setLoading(false);
+      return;
+    }
+
+    setLoading(false);
+  };
 
   return (
     <div className="section-wrapper login-page-wrapper gap-16 flex flex-row py-10 justify-center">
@@ -39,7 +63,7 @@ const Login = () => {
                 Did you forget your password? Reset it here
               </p>
             </div>
-            <Button type="filled" link="#" label="Log in" />
+            <Button type="filled" onClick={handleLogin} label="Log in" />
           </div>
         </div>
       </div>
