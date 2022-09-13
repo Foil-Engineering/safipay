@@ -35,7 +35,7 @@ export default class Login extends Component{
       }
       
     }
-    console.log(res);
+    //console.log(res);
 
   }
   

@@ -14,6 +14,16 @@ export interface Bill {
   status: "Pending" | "Paid" | "Refused";
   currency: string;
   props: any;
+
+  title:string; 
+  description: string; 
+  created : string; 
+  payed_at : string;
+  email_to : string; 
+  attachments : string; 
+  payed : string; 
+  viewed : string; 
+  unique_url_param : string;
 }
 
 interface BillsProps {
@@ -74,21 +84,25 @@ export default class BillsDashboard extends Component<BillsProps>{
                   <div className="form-new-invoice px-6 py-10 gap-28 rounded-3xl flex flex-row justify-between">
                     <div className="form-main flex-1">
                       <InputField
+                        type="text"
                         label="Title"
                         placeholder="Enter the title of your bill here"
                         onTextChange={(t) => {this.setState({new_bill : {...this.state.new_bill,title : t}})}}
                       />
                       <InputField
+                        type="text"
                         label="Description"
                         placeholder="Enter the description of your bill here"
                         onTextChange={(t) => {this.setState({new_bill : {...this.state.new_bill,description : t}})}}
                       />
                       <InputField
+                        type="text"
                         label="Amount ($)"
                         placeholder="0.00"
                         onTextChange={(t) => {this.setState({new_bill : {...this.state.new_bill,amount : t}})}}
                       />
                       <InputField
+                        type="text"
                         label="Send to "
                         placeholder="Enter the employee email address here"
                         onTextChange={(t) => {this.setState({new_bill : {...this.state.new_bill,email_to : t}})}}
