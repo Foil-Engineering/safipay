@@ -17,40 +17,7 @@ export default class Home extends Component{
   
   
   //const [currentTab, setCurrentTab] = useState<string>("bills");
-   dummyData: Bill[] = [];/*[
-    {
-      amount: "100.000",
-      client: "Actom Inc.",
-      currency: "USD",
-      paymentDate: "2022-04-15,  at 01:45 PM",
-      period: "JUN 2022",
-      status: "Pending",
-    },
-    {
-      amount: "100.000",
-      client: "Actom Inc.",
-      currency: "USD",
-      paymentDate: "2022-04-15,  at 01:45 PM",
-      period: "JULY 2022",
-      status: "Pending",
-    },
-    {
-      amount: "130.000",
-      client: "Actom Inc.",
-      currency: "USD",
-      paymentDate: "2022-04-15,  at 01:45 PM",
-      period: "AUGUST 2022",
-      status: "Paid",
-    },
-    {
-      amount: "10.999",
-      client: "Ever Inc.",
-      currency: "USD",
-      paymentDate: "2022-04-15,  at 01:45 PM",
-      period: "SEPTEMBER 2022",
-      status: "Refused",
-    },
-  ];*/
+   dummyData: Bill[] = [];
 
   async componentDidMount(){
     if(!localStorage.token){

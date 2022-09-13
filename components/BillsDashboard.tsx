@@ -13,13 +13,14 @@ export interface Bill {
   paymentDate: string;
   status: "Pending" | "Paid" | "Refused";
   currency: string;
+  props: any;
 }
 
 interface BillsProps {
   data: Bill[];
 }
 
-export default class BillsDashboard extends Component{
+export default class BillsDashboard extends Component<BillsProps>{
   state = {
     showBillModal : false,
     new_bill : {
