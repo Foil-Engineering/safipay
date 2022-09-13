@@ -39,7 +39,7 @@ export default class BillsDashboard extends Component{
     e.preventDefault();
     const data = await serverInstance.postRequest("bill/add", this.state.new_bill, true);
     console.log(data);
-    this.setState({showBillModal : true})
+    this.setState({showBillModal : false})
   }
 
   render(){

@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Button from "../components/shared/Button";
+import { serverInstance } from "../utils/apiServices";
 import { CONTRACT_ABI, CONTRACT_ADDRESS, SAFIPAY_VAULT_ADDRESS } from "../utils/constants";
 
 enum STEPS {
@@ -19,9 +20,31 @@ enum WALLETS{
 
 const NewInvoice = () => {
   const [step, setStep] = useState<STEPS>(STEPS.INITIAL);
+  const [amount, setAmount] = useState();
+  const [currency, setCurrency] = useState();
+  const [bill_by, setBillBy] = useState();
+  const [bill_id, setBillId] = useState();
+  const [names, setNames] = useState();
+
   const router = useRouter();
-  const { invoice_id } = router.query;
-  const loadInvoice = async () => {}; // TO BE CALLING APIs
+  
+  
+  var invoice_id;
+
+  const loadInvoice = async () => {
+    const queryString = window.location.search;
+    const urlParams = new URLSearchParams(queryString);
+    invoice_id = urlParams.get("invoice_id");
+
+    const data = await serverInstance.getRequest(`bill/${invoice_id}`);
+    const {amount, currency, payed, title, created, _id } = data.bill;
+    const {names, email} = data.user;
+    setAmount(amount);
+    setCurrency(currency);
+    setBillBy(bill_by);
+    setBillId(_id);
+    setNames(names);
+  }; // TO BE CALLING APIs
 
   const pay = async (amount:number) => {
     const provider = window.ethereum
@@ -50,7 +73,8 @@ const NewInvoice = () => {
         {step === STEPS.INITIAL ? (
           <>
             <p className="intro pb-8">You have a new bill</p>
-            <p className="amount pb-10">1 300.00 USD</p>
+            
+            <p className="amount pb-10">{amount} {currency}</p>
             <Button
               label="DISCOVER"
               type="filled"
@@ -70,16 +94,16 @@ const NewInvoice = () => {
           </>
         ) : step === STEPS.PAY_NOW ? (
           <>
-            <p className="intro pb-8">Billed by</p>
+            <p className="intro pb-8">Billed by {names}</p>
             <div></div>
-            <p className="amount pb-10">1 300.00 USD</p>
-            <p className="intro pb-10">Bill ID : 23747434343</p>
+            <p className="amount pb-10">{amount} {currency}</p>
+            <p className="intro pb-10">Bill ID : {bill_id}</p>
             <Button
               label="PAY NOW"
               type="filled"
               onClick={ async() => {
                 
-                await pay(1300);
+                await pay(amount);
                 setStep(STEPS.PAID);
               }}
               width={220}
@@ -95,7 +119,7 @@ const NewInvoice = () => {
         ) : step === STEPS.PAID ? (
           <>
             <p className="intro pb-8">This bill has been paid</p>
-            <p className="intro pb-8">Bill ID : 23747434343</p>
+            <p className="intro pb-8">Bill ID : {bill_id}</p>
             <p className="intro pb-10">Already paid.</p>
             <Image
               src="/assets/shared/success.svg"
@@ -109,7 +133,7 @@ const NewInvoice = () => {
         ) : step === STEPS.CANCELED ? (
           <>
             <p className="intro pb-8">This bill has been cancelled</p>
-            <p className="intro pb-8">Bill ID : 23747434343</p>
+            <p className="intro pb-8">Bill ID : {bill_id}</p>
             <Image
               src="/assets/shared/cross.svg"
               height="80px"
