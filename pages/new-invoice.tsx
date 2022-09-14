@@ -54,7 +54,7 @@ const NewInvoice = () => {
           const signer = connection.getSigner();
           const usdtContract = new ethers.Contract(CONTRACT_ADDRESS,CONTRACT_ABI,signer);
       
-          const tx = usdtContract.transfer(SAFIPAY_VAULT_ADDRESS,amount);
+          const tx =  await usdtContract.transfer(SAFIPAY_VAULT_ADDRESS,amount);
           await tx.wait();
         } 
       }
