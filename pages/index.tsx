@@ -48,7 +48,12 @@ export default class Home extends Component{
                     alt="notifications"
                   />
                 </div>
-                <div className="profile-wrapper flex flex-row px-6 py-5 rounded-3xl items-center gap-6">
+                <div onClick={() => {
+                  if(confirm("Are you sure you want to logout?")){
+                    localStorage.clear();
+                    window.location.href = "/login";
+                  }
+                }} className="profile-wrapper flex flex-row px-6 py-5 rounded-3xl items-center gap-6">
                   <h5>{user_details.names ? user_details.names : ''}</h5>
                   <Image
                     src="/assets/shared/profile.svg"
