@@ -25,4 +25,5 @@ export interface InputFieldProps {
   onTextChange: (text: string) => void;
   placeholder: string;
   type: string;
+  value?: string;
 }
