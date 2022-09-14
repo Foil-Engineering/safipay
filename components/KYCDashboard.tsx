@@ -70,7 +70,7 @@ const KYCDashboard = () => {
     }
   }
 
-  const handleFileAdded = (e, file) => {
+  const handleFileAdded = (e) => {
     var file = e.target.files[0];
     setSelectedFile(file);
     var reader = new FileReader();
@@ -120,6 +120,7 @@ const KYCDashboard = () => {
   ];
 
   const user_info = JSON.parse(localStorage.user);
+  const ipfs_verification_link = user_info.kyc_info && user_info.kyc_info.ID_CID ? `https://${user_info.kyc_info.ID_CID}.ipfs.w3s.link` : null;
 
   return (
     <div className="kyc-tab-wrapper p-8">
@@ -153,6 +154,7 @@ const KYCDashboard = () => {
               placeholder={f.placeholder}
             />
           ))}
+          {ipfs_verification_link ? <div><a style={{textDecoration:"underline"}} target="_blank" href={ipfs_verification_link}>View the ID on IPFS({user_info.kyc_info.ID_CID})</a></div> : ''}
           <div style={{position:"relative"}} onClick={handleIDUpload} className="id-photo-wrapper w-full flex justify-center items-center">
             <img style={{position:"absolute","maxHeight":"100%","borderRadius":"20px"}} src={cardBackgroundCSS}/>
             <p>Click here to add your ID</p>
