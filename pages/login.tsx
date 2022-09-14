@@ -83,6 +83,7 @@ export default class Login extends Component{
                 </p>
               </div>
               <Button type="filled" onClick={this.handleLogin} label="Log in" />
+
             </div>
           </div>
         </div>
