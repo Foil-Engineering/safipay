@@ -50,7 +50,8 @@ export default class BillsDashboard extends Component<BillsProps>{
     e.preventDefault();
     const data = await serverInstance.postRequest("bill/add", this.state.new_bill, true);
     console.log(data);
-    this.setState({showBillModal : false})
+    this.setState({showBillModal : false});
+    window.location.href = "/";
   }
 
   render(){
@@ -59,11 +60,11 @@ export default class BillsDashboard extends Component<BillsProps>{
       <div className="bills-dash p-8">
         <div className="header flex flex-row justify-between">
           <div className="">
-            <h2>Your bills</h2>
+            <h2>Your invoices</h2>
             <p className="sub-title">in one place</p>
           </div>
           <Button
-            label="New bill"
+            label="New invoice"
             type="filled"
             width={170}
             icon="/assets/shared/file.svg"

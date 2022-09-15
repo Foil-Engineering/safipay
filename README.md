@@ -14,32 +14,45 @@ Many of us have experienced this problem and for this hackaton, we understood th
 
 Thus, we created SAFIPAY, an easy to use application allowing verified users in African and other countries to have a single place to create and send invoices to employers. These employers have the possibility, thanks to stablecoins to pay their workers who can withdraw money either by mobile money, money transfer or deposit on their accounts on DeFi.
 
-# Flow 
+## Flow 
 
 Here is the flow of use of the application: 
 1. The employee creates a user account and is verified by KYC
+![KYC](md-assets/kyc.png)
+![IPFS](md-assets/ID_File_IPFS.png)
 2. The worker generates an invoice and fills in the employer's email 
-2. Employee clicks on the link received by email 
-3. Employer connects with CoinBase Wallet to pay 
-4. The employee receives an email or a text message that the payment has been made and where to withdraw the money.
+![Bills](md-assets/bills.png)
+3. Employee clicks on the link received by email 
+![Email](md-assets/email.png)
+4. Employer connects with CoinBase Wallet to pay 
+![Coin](md-assets/pay-coin.png)
+5. Thanks to tenderly, we get notified of the action and send notification to the user.
+![Tenderly](md-assets/tenderly.png)
+5. The employee receives an email or a text message that the payment has been made and where to withdraw the money.
 
-# Business Model 
+
+## Business Model 
 
 We intend to make money by charging commissions on payments through SafiPay
 
-# Other applications
+## Other applications
 
 SafiPay will also be able to allow other types of transactions besides bill payments, but also other fund transfers from stablecoins to the means of payment in several developing countries.
 
 SafiPay, having verified users, will also give employers confidence in even more remote workers.
 
-# Future
+## Future
 
 In the future, SafiPay will have an enterprise tool to automate payments over periods of time (months, weeks) to specific employees but also for employees to generate invoices automatically.
 
+## Demo 
+
+Test our [demo application here](https://safipay.vercel.app) 
 
 
-## SAFIPay - Frontend project
+
+
+# SAFIPay - Frontend project
 
 Built with
 
