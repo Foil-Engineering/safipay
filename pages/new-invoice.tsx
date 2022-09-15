@@ -147,7 +147,7 @@ const NewInvoice = () => {
                   await pay(amount);
                 } catch (error) {
                   setStep(STEPS.PAYMENT_FAILED);
-                  console.log("payment failed");
+                  console.log(error);
                 }
               }}
               width={220}
