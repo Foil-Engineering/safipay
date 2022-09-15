@@ -1,10 +1,15 @@
 import { ethers } from "ethers";
+import Head from "next/head";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Button from "../components/shared/Button";
 import { serverInstance } from "../utils/apiServices";
-import { CONTRACT_ABI, CONTRACT_ADDRESS, SAFIPAY_VAULT_ADDRESS } from "../utils/constants";
+import {
+  CONTRACT_ABI,
+  CONTRACT_ADDRESS,
+  SAFIPAY_VAULT_ADDRESS,
+} from "../utils/constants";
 
 enum STEPS {
   PAY_NOW = "PAY_NOW",
@@ -13,9 +18,9 @@ enum STEPS {
   INITIAL = "INITIAL",
 }
 
-enum WALLETS{
+enum WALLETS {
   METAMASK = "metamask",
-  COINBASE = "coinbase"
+  COINBASE = "coinbase",
 }
 
 const NewInvoice = () => {
@@ -27,8 +32,7 @@ const NewInvoice = () => {
   const [names, setNames] = useState();
 
   const router = useRouter();
-  
-  
+
   var invoice_id;
 
   const loadInvoice = async () => {
@@ -37,8 +41,8 @@ const NewInvoice = () => {
     invoice_id = urlParams.get("invoice_id");
 
     const data = await serverInstance.getRequest(`bill/${invoice_id}`);
-    const {amount, currency, payed, title, created, _id } = data.bill;
-    const {names, email} = data.user;
+    const { amount, currency, payed, title, created, _id } = data.bill;
+    const { names, email } = data.user;
     setAmount(amount);
     setCurrency(currency);
     setBillBy(bill_by);
@@ -46,26 +50,54 @@ const NewInvoice = () => {
     setNames(names);
   }; // TO BE CALLING APIs
 
-  const pay = async (amount:number) => {
-    const provider = window.ethereum
-    if (window.ethereum) {
-          provider .request({ method: 'eth_requestAccounts' });
-          const connection = new ethers.providers.Web3Provider(provider);
-          const signer = connection.getSigner();
-          const usdtContract = new ethers.Contract(CONTRACT_ADDRESS,CONTRACT_ABI,signer);
-      
-          const tx =  await usdtContract.transfer(SAFIPAY_VAULT_ADDRESS,amount);
-          await tx.wait();
-        } 
+  const pay = async (amount: number) => {
+    const provider = window.ethereum;
+
+    if (provider) {
+      await switchChain(provider);
+      await provider.request({ method: "eth_requestAccounts" });
+      const connection = new ethers.providers.Web3Provider(provider);
+      const signer = connection.getSigner();
+      const usdtContract = new ethers.Contract(
+        CONTRACT_ADDRESS,
+        CONTRACT_ABI,
+        signer
+      );
+
+      const tx = await usdtContract.transfer(
+        SAFIPAY_VAULT_ADDRESS,
+        ethers.utils.parseUnits(amount.toString(), 18)
+      );
+      await tx.wait();
+    } else {
+      console.log("no wallet detected");
+    }
+  };
+
+  const switchChain = async (provider: any) => {
+    const chainId = await provider.request({ method: "eth_chainId" });
+
+    try {
+      if (chainId !== "0x5") {
+        await provider.request({
+          method: "wallet_switchEthereumChain",
+          params: [{ chainId: "0x5" }],
+        });
       }
-  
-  
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     loadInvoice();
   }, []);
 
   return (
     <div className="new-invoice-wrapper py-28">
+      <Head>
+        <title>Safipay - Invoice</title>
+      </Head>
       <div className="section-wrapper rounded-3xl flex flex-col items-center py-12">
         <div className="logo flex justify-center items-center mb-20">
           <h4>SafiPay</h4>
@@ -73,8 +105,10 @@ const NewInvoice = () => {
         {step === STEPS.INITIAL ? (
           <>
             <p className="intro pb-8">You have a new bill</p>
-            
-            <p className="amount pb-10">{amount} {currency}</p>
+
+            <p className="amount pb-10">
+              {amount} {currency}
+            </p>
             <Button
               label="DISCOVER"
               type="filled"
@@ -96,15 +130,21 @@ const NewInvoice = () => {
           <>
             <p className="intro pb-8">Billed by {names}</p>
             <div></div>
-            <p className="amount pb-10">{amount} {currency}</p>
+            <p className="amount pb-10">
+              {amount} {currency}
+            </p>
             <p className="intro pb-10">Bill ID : {bill_id}</p>
             <Button
               label="PAY NOW"
               type="filled"
-              onClick={ async() => {
-                
-                await pay(amount);
-                setStep(STEPS.PAID);
+              onClick={async () => {
+                try {
+                  console.log('hum');
+                  await pay(amount);
+                  setStep(STEPS.PAID);
+                } catch (error) {
+                  console.log("payment failed");
+                }
               }}
               width={220}
             />

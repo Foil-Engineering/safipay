@@ -11,6 +11,7 @@ const Button: FC<SharedButtonProps> = (props) => {
     width = 0,
     icon,
     hasShaddow = false,
+    loading,
     onClick,
   } = props;
   return (
@@ -30,7 +31,16 @@ const Button: FC<SharedButtonProps> = (props) => {
           ) : (
             <></>
           )}
-          <p className="btn-label">{label}</p>
+          {loading ? (
+            <Image
+              src="/assets/shared/loading.gif"
+              alt="loading"
+              height="26px"
+              width="26px"
+            />
+          ) : (
+            <p className="btn-label">{label}</p>
+          )}
         </a>
       ) : (
         <button
@@ -46,7 +56,16 @@ const Button: FC<SharedButtonProps> = (props) => {
           ) : (
             <></>
           )}
-          <p className="btn-label">{label}</p>
+          {loading ? (
+            <Image
+              src="/assets/shared/loading.gif"
+              alt="loading"
+              height="26px"
+              width="26px"
+            />
+          ) : (
+            <p className="btn-label">{label}</p>
+          )}
         </button>
       )}
     </>
