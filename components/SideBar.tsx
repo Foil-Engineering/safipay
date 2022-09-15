@@ -15,7 +15,7 @@ const SideBar: FC<SidebarProps> = (props) => {
       id: "dashboard",
     },
     {
-      label: "Bills",
+      label: "Invoices",
       activeIcon: "/assets/shared/bills-active.svg",
       inactiveIcon: "/assets/shared/bills-inactive.svg",
       id: "bills",

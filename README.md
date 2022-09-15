@@ -21,7 +21,8 @@ Here is the flow of use of the application:
 ![KYC](md-assets/kyc.png)
 ![IPFS](md-assets/ID_File_IPFS.png)
 2. The worker generates an invoice and fills in the employer's email 
-![Bills](md-assets/bills.png)
+![Bills](md-assets/invoices.png)
+![Bills](md-assets/new-invoice.png)
 3. Employee clicks on the link received by email 
 ![Email](md-assets/email.png)
 4. Employer connects with CoinBase Wallet to pay 

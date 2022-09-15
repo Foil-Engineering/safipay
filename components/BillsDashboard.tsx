@@ -80,7 +80,7 @@ export default class BillsDashboard extends Component<BillsProps>{
           <div className="absolute container-modal inset-0 z-10 py-10">
             <div className="modal-invoice rounded-3xl">
               <div className="modal-wrapper w-full">
-                <h3 className="mb-5">New bill</h3>
+                <h3 className="mb-5">New invoice</h3>
                 <form onSubmit={this.handleFormSubmit}>
                   <div className="form-new-invoice px-6 py-10 gap-28 rounded-3xl flex flex-row justify-between">
                     <div className="form-main flex-1">
