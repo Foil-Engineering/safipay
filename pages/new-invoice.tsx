@@ -16,6 +16,8 @@ enum STEPS {
   CANCELED = "CANCELED",
   PAID = "PAID",
   INITIAL = "INITIAL",
+  NO_WALLET = "NO_WALLET",
+  PAYMENT_FAILED = "PAYMENT_FAILED",
 }
 
 enum WALLETS {
@@ -54,7 +56,7 @@ const NewInvoice = () => {
     const provider = window.ethereum;
 
     if (provider) {
-      await switchChain(provider);
+      //await switchChain(provider);
       await provider.request({ method: "eth_requestAccounts" });
       const connection = new ethers.providers.Web3Provider(provider);
       const signer = connection.getSigner();
@@ -69,14 +71,16 @@ const NewInvoice = () => {
         ethers.utils.parseUnits(amount.toString(), 18)
       );
       await tx.wait();
+      setStep(STEPS.PAID);
     } else {
+      setStep(STEPS.NO_WALLET);
       console.log("no wallet detected");
     }
   };
 
   const switchChain = async (provider: any) => {
     const chainId = await provider.request({ method: "eth_chainId" });
-
+    console.log("Chain ID",chainId);
     try {
       if (chainId !== "0x5") {
         await provider.request({
@@ -141,9 +145,9 @@ const NewInvoice = () => {
                 try {
                   console.log('hum');
                   await pay(amount);
-                  setStep(STEPS.PAID);
                 } catch (error) {
-                  console.log("payment failed");
+                  setStep(STEPS.PAYMENT_FAILED);
+                  console.log(error);
                 }
               }}
               width={220}
@@ -183,7 +187,20 @@ const NewInvoice = () => {
             <div className="py-4" />
             <Button label="CLOSE" link="/" type="filled-danger" width={220} />
           </>
-        ) : (
+        ) : step === STEPS.NO_WALLET ? (
+          <>
+          <p className="intro pb-8">No wallet detected</p>
+          <p className="intro pb-8">Please install Coinbase wallet to complete this transaction</p>
+          <Button label="CLOSE" link="/" type="filled-danger" width={220} />
+            </>
+        )
+        : step === STEPS.PAYMENT_FAILED ? (
+          <>
+          <p className="intro pb-8">Payment failed</p>
+          <p className="intro pb-8">Failed to complete this transaction</p>
+          <Button label="CLOSE" link="/" type="filled-danger" width={220} />
+          </>
+        ): (
           <></>
         )}
       </div>
