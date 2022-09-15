@@ -60,9 +60,10 @@ const KYCDashboard = () => {
         ))}
       </div>
       {currentTab === KYCTabs.VERIFY ? (
-        <div className="w-4/5 form-content">
+        <div className="md:w-4/5 w-full form-content">
           {fields.map((f, i) => (
             <InputField
+              type="text"
               label={f.label}
               key={i}
               onTextChange={(t) => {}}
@@ -82,8 +83,9 @@ const KYCDashboard = () => {
           />
         </div>
       ) : currentTab === KYCTabs.UPDATE_ACCOUNT ? (
-        <div className="w-4/5">
+        <div className="md:w-4/5 w-full">
           <InputField
+            type="text"
             label="Your names"
             placeholder="Enter your names"
             onTextChange={(t) => {}}
@@ -98,6 +100,7 @@ const KYCDashboard = () => {
           />
           {pwdFields.map((f, i) => (
             <InputField
+              type="text"
               label={f.label}
               placeholder={f.placeholder}
               onTextChange={(t) => {}}
