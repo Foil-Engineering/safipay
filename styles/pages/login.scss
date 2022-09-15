@@ -40,6 +40,10 @@
 
   .illustrations {
     width: 30%;
+
+    @media screen and (max-width: 767px) {
+      width: 100%;
+    }
   }
 
   .login-illustration-bg {
@@ -49,7 +53,7 @@
     background-position: center;
     background-repeat: no-repeat;
     border-radius: 20px;
-    background-image: url("../../public/assets/pages/login/bg-big.svg");
+    background-image: url("../../public/assets/pages/login/bgg.png");
   }
 
   .login-illustration-xs {

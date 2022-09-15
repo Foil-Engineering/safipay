@@ -1,10 +1,10 @@
-import { FC, useState } from "react";
 import Button from "./shared/Button";
 import InputField from "./shared/InputField";
 import SingleBill from "./SingleBill";
 
-import React,{Component} from "react";
+import React, { Component } from "react";
 import { serverInstance } from "../utils/apiServices";
+import { toast } from "react-toast";
 
 export interface Bill {
   client: string;
@@ -15,51 +15,61 @@ export interface Bill {
   currency: string;
   props: any;
 
-  title:string; 
-  description: string; 
-  created : string; 
-  payed_at : string;
-  email_to : string; 
-  attachments : string; 
-  payed : string; 
-  viewed : string; 
-  unique_url_param : string;
+  title: string;
+  description: string;
+  created: string;
+  payed_at: string;
+  email_to: string;
+  attachments: string;
+  payed: string;
+  viewed: string;
+  unique_url_param: string;
 }
 
 interface BillsProps {
   data: Bill[];
 }
 
-export default class BillsDashboard extends Component<BillsProps>{
+export default class BillsDashboard extends Component<BillsProps> {
   state = {
-    showBillModal : false,
-    new_bill : {
-      title : '',
-      description : '',
-      currency : 'USD',
-      amount : 0,
-      email_to : '',
-      attachment : []
-    }
+    showBillModal: false,
+    loading: false,
+    new_bill: {
+      title: "",
+      description: "",
+      currency: "USD",
+      amount: 0,
+      email_to: "",
+      attachment: [],
+    },
   };
-
-  //data = this.props && this.props.data ? this.props.data : [];
-  //const [showBillModal, setShowBillModal] = useState<boolean>(false);
 
   handleFormSubmit = async (e) => {
     e.preventDefault();
-    const data = await serverInstance.postRequest("bill/add", this.state.new_bill, true);
-    console.log(data);
-    this.setState({showBillModal : false});
-    window.location.href = "/";
-  }
+    try {
+      this.setState({ loading: true });
+      const data = await serverInstance.postRequest(
+        "bill/add",
+        this.state.new_bill,
+        true
+      );
+      console.log(data);
+      this.setState({ showBillModal: false });
+      // refresh the page to get bills
+      window.location.reload();
+      this.setState({ loading: false });
+      toast.success("Invoice sent to your client");
+    } catch (error) {
+      toast.error("something went wrong");
+    }
+  };
 
-  render(){
+  render() {
     const data = this.props && this.props.data ? this.props.data : [];
     return (
       <div className="bills-dash p-8">
-        <div className="header flex flex-row justify-between">
-          <div className="">
+        <div className="header flex sm:flex-row flex-col justify-between">
+          <div className="pb-4 sm:pb-0">
             <h2>Your invoices</h2>
             <p className="sub-title">in one place</p>
           </div>
@@ -68,7 +78,7 @@ export default class BillsDashboard extends Component<BillsProps>{
             type="filled"
             width={170}
             icon="/assets/shared/file.svg"
-            onClick={() => this.setState({showBillModal : true})}
+            onClick={() => this.setState({ showBillModal: true })}
           />
         </div>
         <div className="cards grid-d3-t2-m1 mt-12 gap-5">
@@ -88,25 +98,44 @@ export default class BillsDashboard extends Component<BillsProps>{
                         type="text"
                         label="Title"
                         placeholder="Enter the title of your bill here"
-                        onTextChange={(t) => {this.setState({new_bill : {...this.state.new_bill,title : t}})}}
+                        onTextChange={(t) => {
+                          this.setState({
+                            new_bill: { ...this.state.new_bill, title: t },
+                          });
+                        }}
                       />
                       <InputField
                         type="text"
                         label="Description"
                         placeholder="Enter the description of your bill here"
-                        onTextChange={(t) => {this.setState({new_bill : {...this.state.new_bill,description : t}})}}
+                        onTextChange={(t) => {
+                          this.setState({
+                            new_bill: {
+                              ...this.state.new_bill,
+                              description: t,
+                            },
+                          });
+                        }}
                       />
                       <InputField
                         type="text"
                         label="Amount ($)"
                         placeholder="0.00"
-                        onTextChange={(t) => {this.setState({new_bill : {...this.state.new_bill,amount : t}})}}
+                        onTextChange={(t) => {
+                          this.setState({
+                            new_bill: { ...this.state.new_bill, amount: t },
+                          });
+                        }}
                       />
                       <InputField
                         type="text"
                         label="Send to "
                         placeholder="Enter the employee email address here"
-                        onTextChange={(t) => {this.setState({new_bill : {...this.state.new_bill,email_to : t}})}}
+                        onTextChange={(t) => {
+                          this.setState({
+                            new_bill: { ...this.state.new_bill, email_to: t },
+                          });
+                        }}
                       />
                       <div className="pt-8 pb-4">
                         <Button
@@ -114,10 +143,12 @@ export default class BillsDashboard extends Component<BillsProps>{
                           type="filled"
                           icon="/assets/shared/save.svg"
                           width={240}
-                        
+                          loading={this.state.loading}
                         />
                         <p
-                          onClick={() => this.setState({showBillModal : false})}
+                          onClick={() =>
+                            this.setState({ showBillModal: false })
+                          }
                           className="cancel-btn mt-4"
                         >
                           Cancel
@@ -144,12 +175,3 @@ export default class BillsDashboard extends Component<BillsProps>{
     );
   }
 }
-
-/*const BillsDashboard: FC<BillsProps> = (props) => {
-  const { data } = props;
-  const [showBillModal, setShowBillModal] = useState<boolean>(false);
-
-  
-};
-
-export default BillsDashboard;*/
