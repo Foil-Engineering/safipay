@@ -1,7 +1,6 @@
 import Button from "../components/shared/Button";
 import InputField from "../components/shared/InputField";
 import { serverInstance } from "../utils/apiServices";
-
 import React, { Component } from "react";
 import Head from "next/head";
 import { toast, ToastContainer } from "react-toast";
