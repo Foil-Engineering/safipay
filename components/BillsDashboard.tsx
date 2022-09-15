@@ -58,7 +58,7 @@ export default class BillsDashboard extends Component<BillsProps> {
       // refresh the page to get bills
       window.location.reload();
       this.setState({ loading: false });
-      toast.success('Invoice sent to your client');
+      toast.success("Invoice sent to your client");
     } catch (error) {
       toast.error("something went wrong");
     }
@@ -70,11 +70,11 @@ export default class BillsDashboard extends Component<BillsProps> {
       <div className="bills-dash p-8">
         <div className="header flex sm:flex-row flex-col justify-between">
           <div className="pb-4 sm:pb-0">
-            <h2>Your bills</h2>
+            <h2>Your invoices</h2>
             <p className="sub-title">in one place</p>
           </div>
           <Button
-            label="New bill"
+            label="New invoice"
             type="filled"
             width={170}
             icon="/assets/shared/file.svg"
@@ -90,7 +90,7 @@ export default class BillsDashboard extends Component<BillsProps> {
           <div className="absolute container-modal inset-0 z-10 py-10">
             <div className="modal-invoice rounded-3xl">
               <div className="modal-wrapper w-full">
-                <h3 className="mb-5">New bill</h3>
+                <h3 className="mb-5">New invoice</h3>
                 <form onSubmit={this.handleFormSubmit}>
                   <div className="form-new-invoice px-6 py-10 gap-28 rounded-3xl flex flex-row justify-between">
                     <div className="form-main flex-1">
@@ -175,12 +175,3 @@ export default class BillsDashboard extends Component<BillsProps> {
     );
   }
 }
-
-/*const BillsDashboard: FC<BillsProps> = (props) => {
-  const { data } = props;
-  const [showBillModal, setShowBillModal] = useState<boolean>(false);
-
-  
-};
-
-export default BillsDashboard;*/
