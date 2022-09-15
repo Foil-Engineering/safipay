@@ -50,8 +50,15 @@ In the future, SafiPay will have an enterprise tool to automate payments over pe
 
 Test our [demo application here](https://safipay.vercel.app) 
 
+## Team 
 
+David Kathoh - [Twitter](https://twitter.com/DavidKathoh) - [Github](https://github.com/davidkathoh)  
+Pacifique Linjanja - [Twitter](https://twitter.com/PacifiqueLinja1) - [Github](https://github.com/pacyL2K19)   
+Eliel Mathe - [Twitter](https://twitter.com/elielmathe) - [Github](https://github.com/elielnfinic)  
 
+## Contact us   
+
+Send us an email here [safipay@nfinic.com](safipay@nfinic.com)
 
 # SAFIPay - Frontend project
 
