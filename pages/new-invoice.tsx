@@ -16,6 +16,8 @@ enum STEPS {
   CANCELED = "CANCELED",
   PAID = "PAID",
   INITIAL = "INITIAL",
+  NO_WALLET = "NO_WALLET",
+  PAYMENT_FAILED = "PAYMENT_FAILED",
 }
 
 enum WALLETS {
@@ -69,7 +71,9 @@ const NewInvoice = () => {
         ethers.utils.parseUnits(amount.toString(), 18)
       );
       await tx.wait();
+      setStep(STEPS.PAID);
     } else {
+      setStep(STEPS.NO_WALLET);
       console.log("no wallet detected");
     }
   };
@@ -141,8 +145,8 @@ const NewInvoice = () => {
                 try {
                   console.log('hum');
                   await pay(amount);
-                  setStep(STEPS.PAID);
                 } catch (error) {
+                  setStep(STEPS.PAYMENT_FAILED);
                   console.log("payment failed");
                 }
               }}
@@ -183,7 +187,20 @@ const NewInvoice = () => {
             <div className="py-4" />
             <Button label="CLOSE" link="/" type="filled-danger" width={220} />
           </>
-        ) : (
+        ) : step === STEPS.NO_WALLET ? (
+          <>
+          <p className="intro pb-8">No wallet detected</p>
+          <p className="intro pb-8">Please install Coinbase wallet to complete this transaction</p>
+          <Button label="CLOSE" link="/" type="filled-danger" width={220} />
+            </>
+        )
+        : step === STEPS.PAYMENT_FAILED ? (
+          <>
+          <p className="intro pb-8">Payment failed</p>
+          <p className="intro pb-8">Failed to complete this transaction</p>
+          <Button label="CLOSE" link="/" type="filled-danger" width={220} />
+          </>
+        ): (
           <></>
         )}
       </div>
