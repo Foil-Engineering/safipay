@@ -139,6 +139,7 @@ const NewInvoice = () => {
               type="filled"
               onClick={async () => {
                 try {
+                  console.log('hum');
                   await pay(amount);
                   setStep(STEPS.PAID);
                 } catch (error) {
