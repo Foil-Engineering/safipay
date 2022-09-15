@@ -1,7 +1,9 @@
+import { ethers } from "ethers";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Button from "../components/shared/Button";
+import { CONTRACT_ABI, CONTRACT_ADDRESS, SAFIPAY_VAULT_ADDRESS } from "../utils/constants";
 
 enum STEPS {
   PAY_NOW = "PAY_NOW",
@@ -10,12 +12,50 @@ enum STEPS {
   INITIAL = "INITIAL",
 }
 
+enum WALLETS{
+  METAMASK = "metamask",
+  COINBASE = "coinbase"
+}
+
 const NewInvoice = () => {
   const [step, setStep] = useState<STEPS>(STEPS.INITIAL);
   const router = useRouter();
   const { invoice_id } = router.query;
   const loadInvoice = async () => {}; // TO BE CALLING APIs
 
+  const pay = async (amount:number) => {
+    const provider = window.ethereum
+    
+    if (provider) {
+          await switchChain(provider);
+          await provider.request({ method: 'eth_requestAccounts' });
+          const connection = new ethers.providers.Web3Provider(provider);
+          const signer = connection.getSigner();
+          const usdtContract = new ethers.Contract(CONTRACT_ADDRESS,CONTRACT_ABI,signer);
+      
+          const tx =  await usdtContract.transfer(SAFIPAY_VAULT_ADDRESS,ethers.utils.parseUnits(amount.toString(),18));
+          await tx.wait();
+        }else{
+          console.log("no wallet detected")
+        } 
+      }
+   const switchChain =async (provider:any) => {
+        const chainId = await provider.request({ method: 'eth_chainId' });
+
+        try {
+          if(chainId !== '0x5'){
+            await provider.request({
+              method: 'wallet_switchEthereumChain',
+              params: [{ chainId: '0x5'}],
+            });
+          }
+        } catch (error) {
+          console.log(error)
+        }
+        
+   }    
+  
+  
   useEffect(() => {
     loadInvoice();
   }, []);
@@ -56,7 +96,17 @@ const NewInvoice = () => {
             <Button
               label="PAY NOW"
               type="filled"
-              onClick={() => setStep(STEPS.PAID)}
+              onClick={ async() => {
+                
+                try {
+                  await pay(1300);
+                  setStep(STEPS.PAID);
+                } catch (error) {
+                  console.log("payment failed");
+                }
+               
+                
+              }}
               width={220}
             />
             <div className="py-4" />
