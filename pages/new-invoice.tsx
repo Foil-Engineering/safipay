@@ -56,7 +56,7 @@ const NewInvoice = () => {
     const provider = window.ethereum;
 
     if (provider) {
-      await switchChain(provider);
+      //await switchChain(provider);
       await provider.request({ method: "eth_requestAccounts" });
       const connection = new ethers.providers.Web3Provider(provider);
       const signer = connection.getSigner();
@@ -80,7 +80,7 @@ const NewInvoice = () => {
 
   const switchChain = async (provider: any) => {
     const chainId = await provider.request({ method: "eth_chainId" });
-
+    console.log("Chain ID",chainId);
     try {
       if (chainId !== "0x5") {
         await provider.request({
