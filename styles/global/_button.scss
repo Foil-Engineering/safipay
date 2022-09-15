@@ -1,0 +1,47 @@
+.btn {
+  border-radius: 10px;
+  padding: 12px;
+
+  p {
+    text-align: center;
+    width: 100%;
+    color: var(--white);
+    font-weight: 400;
+  }
+}
+
+.btn.primary.filled-btn {
+  background-color: var(--primary-color);
+}
+
+.btn.filled-secondary-btn {
+  background-color: #7aaff7;
+}
+
+.btn.btn.filled-danger-btn {
+  background-color: rgb(193, 56, 56);
+}
+
+.btn.full {
+  width: 100%;
+}
+
+.btn.w130 {
+  width: 130px;
+}
+
+.btn.w170 {
+  width: 170px;
+}
+
+.btn.w190 {
+  width: 190px;
+}
+
+.btn.w240 {
+  width: 240px;
+}
+
+.btn.w220 {
+  width: 220px;
+}

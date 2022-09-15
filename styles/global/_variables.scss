@@ -1,0 +1,17 @@
+body {
+  --dark-blue: #040d21;
+  --dark-dark: #020508;
+  ---body-bg: #F5F5F5;
+  --white: #fff;
+  --black: #000;
+  --primary-color: #6FCF97;
+}
+
+.grid-d3-t2-m1 {
+  display: grid !important;
+  grid-template-columns: repeat(2, 1fr);
+
+  @media screen and (max-width: 767px) {
+    grid-template-columns: repeat(1, 1fr) !important;
+  }
+}
