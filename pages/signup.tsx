@@ -1,47 +1,49 @@
 import Button from "../components/shared/Button";
 import InputField from "../components/shared/InputField";
 
-import React,{Component} from "react";
+import React, { Component } from "react";
 
-import {serverInstance} from "../utils/apiServices";
+import { serverInstance } from "../utils/apiServices";
+import Head from "next/head";
 
-export default class Login extends Component{
+export default class Login extends Component {
   loginFields = [
-    { placeholder: "Email address" , name : "email", type : "email" },
-    { placeholder: "Names", name : "names", type : "text" },
-    { placeholder: "Password", name : "password", type : "password" },
+    { placeholder: "Email address", name: "email", type: "email" },
+    { placeholder: "Names", name: "names", type: "text" },
+    { placeholder: "Password", name: "password", type: "password" },
   ];
 
   state = {
-    email : "",
-    names : "",
-    password : ""
-  }
+    email: "",
+    names: "",
+    password: "",
+  };
 
-  handleFormSubmit = async(event) => {
+  handleFormSubmit = async (event) => {
     event.preventDefault();
     //const output = await serverInstance.postRequest("auth/signup", this.state);
     //console.log(output);
-    const data = await serverInstance.postRequest("signup",this.state,false);
+    const data = await serverInstance.postRequest("signup", this.state, false);
     if (data) {
       console.log(data);
       //return;
-      if(data.token){
+      if (data.token) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
-        this.setState({loading : false});
+        this.setState({ loading: false });
         window.location.href = "/";
         return;
       }
-      
     }
     //console.log(res);
+  };
 
-  }
-  
-  render(){
+  render() {
     return (
       <div className="section-wrapper login-page-wrapper gap-16 flex flex-row py-10 justify-center">
+        <Head>
+          <title>Safipay - Signup</title>
+        </Head>
         <div className="relative illustrations">
           <h1 className="font-normal p-3 text-2xl leading-7 mb-5">SafiPay</h1>
           <div className="login-illustration-bg" />
@@ -64,9 +66,11 @@ export default class Login extends Component{
                 {this.loginFields.map((field, idx) => (
                   <InputField
                     key={idx}
-                    type={field.type} 
+                    type={field.type}
                     placeholder={field.placeholder}
-                    onTextChange={(text) => this.setState({[field.name] : text})}
+                    onTextChange={(text) =>
+                      this.setState({ [field.name]: text })
+                    }
                   />
                 ))}
                 <div className="flex flex-row justify-end">

@@ -1,55 +1,67 @@
-import { useState } from "react";
 import Button from "../components/shared/Button";
 import InputField from "../components/shared/InputField";
 import { serverInstance } from "../utils/apiServices";
 
-import React,{Component} from "react";
+import React, { Component } from "react";
+import Head from "next/head";
+import { toast, ToastContainer } from "react-toastify";
 
-export default class Login extends Component{
+export default class Login extends Component {
   state = {
-    email : "",
-    password : "",
-    lading : ""
+    email: "",
+    password: "",
+    loading: false,
   };
 
   loginFields = [
-    { placeholder: "Email address", type : "email", name : "email" },
-    { placeholder: "Password", type: "password", name : "password" },
+    { placeholder: "Email address", type: "email", name: "email" },
+    { placeholder: "Password", type: "password", name: "password" },
   ];
 
   //component mounted
-  componentDidMount(){
-    if(localStorage.token){
+  componentDidMount() {
+    if (localStorage.token) {
       window.location.href = "/";
     }
   }
 
   handleLogin = async () => {
-    this.setState({loading : true});
+    this.setState({ loading: true });
     const data = await serverInstance.postRequest("login", {
       email: this.state.email,
       password: this.state.password,
     });
     if (data) {
       console.log(data);
-      //return;
-      if(data.token){
+
+      if (data.token) {
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
-        this.setState({loading : false});
+        this.setState({ loading: false });
         window.location.href = "/";
         return;
       }
-      
+
+      toast('🦄 Wow so easy!', {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        });
     }
 
-    this.setState({loading : false});
+    this.setState({ loading: false });
   };
 
-
-  render(){
+  render() {
     return (
       <div className="section-wrapper login-page-wrapper gap-16 flex flex-row py-10 justify-center">
+        <Head>
+          <title>Safipay - Login</title>
+        </Head>
         <div className="relative illustrations">
           <h1 className="font-normal p-3 text-2xl leading-7 mb-5">SafiPay</h1>
           <div className="login-illustration-bg" />
@@ -73,7 +85,7 @@ export default class Login extends Component{
                   key={idx}
                   type={field.type}
                   placeholder={field.placeholder}
-                  onTextChange={(text) => this.setState({[field.name] : text})}
+                  onTextChange={(text) => this.setState({ [field.name]: text })}
                 />
               ))}
               <div className="flex flex-row justify-end">
@@ -81,12 +93,17 @@ export default class Login extends Component{
                   Did you forget your password? Reset it here
                 </p>
               </div>
-              <Button type="filled" onClick={this.handleLogin} label="Log in" />
+              <Button
+                type="filled"
+                onClick={this.handleLogin}
+                label="Log in"
+                loading={this.state.loading}
+              />
             </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
     );
   }
 }
-
