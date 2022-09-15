@@ -60,6 +60,15 @@ Eliel Mathe - [Twitter](https://twitter.com/elielmathe) - [Github](https://githu
 
 Send us an email here [safipay@nfinic.com](safipay@nfinic.com)
 
+    
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>  
+
 # SAFIPay - Frontend project
 
 Built with
