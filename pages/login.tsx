@@ -4,7 +4,7 @@ import { serverInstance } from "../utils/apiServices";
 
 import React, { Component } from "react";
 import Head from "next/head";
-import { toast, ToastContainer } from "react-toastify";
+import { toast, ToastContainer } from "react-toast";
 
 export default class Login extends Component {
   state = {
@@ -26,29 +26,37 @@ export default class Login extends Component {
   }
 
   handleLogin = async () => {
-    this.setState({ loading: true });
-    const data = await serverInstance.postRequest("login", {
-      email: this.state.email,
-      password: this.state.password,
-    });
-    if (data) {
-      console.log(data);
+    if (
+      /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(this.state.email) &&
+      this.state.password.length > 2
+    ) {
+      this.setState({ loading: true });
+      const data = await serverInstance.postRequest("login", {
+        email: this.state.email,
+        password: this.state.password,
+      });
+      if (data) {
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("user", JSON.stringify(data.user));
+          this.setState({ loading: false });
+          toast.success("logged in successfully");
+          window.location.href = "/";
+          return;
+        }
 
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
-        this.setState({ loading: false });
-        window.location.href = "/";
-        return;
+        toast.error(data.error);
       }
-    }
 
-    this.setState({ loading: false });
+      this.setState({ loading: false });
+    } else {
+      toast.error("please put valid data");
+    }
   };
 
   render() {
     return (
-      <div className="section-wrapper login-page-wrapper gap-16 flex flex-row py-10 justify-center">
+      <div className="section-wrapper login-page-wrapper gap-16 flex md:flex-row flex-col py-10 justify-center">
         <Head>
           <title>Safipay - Login</title>
         </Head>

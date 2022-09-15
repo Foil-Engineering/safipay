@@ -5,6 +5,7 @@ import React, { Component } from "react";
 
 import { serverInstance } from "../utils/apiServices";
 import Head from "next/head";
+import { toast, ToastContainer } from "react-toast";
 
 export default class Login extends Component {
   loginFields = [
@@ -17,25 +18,39 @@ export default class Login extends Component {
     email: "",
     names: "",
     password: "",
+    loading: false,
   };
 
   handleFormSubmit = async (event) => {
     event.preventDefault();
-    //const output = await serverInstance.postRequest("auth/signup", this.state);
-    //console.log(output);
-    const data = await serverInstance.postRequest("signup", this.state, false);
-    if (data) {
-      console.log(data);
-      //return;
-      if (data.token) {
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
-        this.setState({ loading: false });
-        window.location.href = "/";
-        return;
+    if (
+      this.state.names.length > 2 &&
+      /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(this.state.email) &&
+      this.state.password.length > 5
+    ) {
+      this.setState({ loading: true });
+      const data = await serverInstance.postRequest(
+        "signup",
+        this.state,
+        false
+      );
+      if (data) {
+        console.log(data);
+        if (data.token) {
+          localStorage.setItem("token", data.token);
+          localStorage.setItem("user", JSON.stringify(data.user));
+          this.setState({ loading: false });
+          window.location.href = "/";
+          return;
+        }
+
+        toast.success('account created successfully');
       }
+
+      this.setState({ loading: false });
+    } else {
+      toast.error('Please put valid data');
     }
-    //console.log(res);
   };
 
   render() {
@@ -78,11 +93,16 @@ export default class Login extends Component {
                     Did you forget your password? Reset it here
                   </p>
                 </div>
-                <Button type="filled" label="Sign up" />
+                <Button
+                  type="filled"
+                  label="Sign up"
+                  loading={this.state.loading}
+                />
               </form>
             </div>
           </div>
         </div>
+        <ToastContainer />
       </div>
     );
   }
