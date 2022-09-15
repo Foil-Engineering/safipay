@@ -18,10 +18,12 @@ export interface SharedButtonProps {
   icon?: string;
   hasShaddow?: boolean;
   onClick?: () => void;
+  loading?: boolean;
 }
 
 export interface InputFieldProps {
   label?: string;
   onTextChange: (text: string) => void;
   placeholder: string;
+  type: string;
 }

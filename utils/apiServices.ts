@@ -1,7 +1,7 @@
 class ApiServices {
   constructor() {}
 
-  private readonly BASE_URL = "http://safi-pay.herokuapp.com:443/";
+  private readonly BASE_URL = "https://safi-pay.herokuapp.com:443/";
 
   postRequest = async (
     endpoint: string,
@@ -20,23 +20,29 @@ class ApiServices {
           : headers,
         method: "POST",
         body: JSON.stringify(body),
+        redirect: "follow"
       });
+
+
 
       const data = await res.json();
       return data;
     } catch (error) {
+      console.log(error);
       console.log("ERROR");
       return null;
     }
   };
 
-  getRequest = async (endpoint: string) => {
+  getRequest = async (endpoint: string, isProtected : boolean = false) => {
     try {
+      const headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      };
+
       const res = await fetch(`${this.BASE_URL}${endpoint}`, {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
+        headers: isProtected ? { ...headers, Authorization: this.getToken() } : headers,
         method: "GET",
       });
 
@@ -51,7 +57,7 @@ class ApiServices {
   putRequest = async () => {};
 
   getToken = () => {
-    return localStorage.getItem("auth-token") ?? "";
+    return "Bearer " + localStorage.getItem("token") ?? "";
   };
 }
 
